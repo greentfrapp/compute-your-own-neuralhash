@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="./main.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+  <script src="./assets/seed.js"> </script>
+</head>
+
+<body>
+  <div id="app">
+    <section class="section">
+      <nav class="level">
+        <p class="level-item has-text-centered mobile-only">
+          <img src="./neuralhash-title.png" alt="" style="height: 60px;">
+        </p>
+        <p class="level-item has-text-centered">
+          <a class="link is-info" href="https://medium.com/@sweekiat/apples-neuralhash-how-it-works-and-ways-to-break-it-577d1edc9838">Introduction</a>
+        </p>
+        <p class="level-item has-text-centered desktop-only">
+          <img src="./assets/neuralhash-title.png" alt="" style="height: 60px;">
+        </p>
+        <p class="level-item has-text-centered">
+          <a class="link is-info">Repository</a>
+        </p>
+      </nav>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-6">
+          <p>Click on the image to select your own. Hashes are computed on your device and nothing is uploaded.</p>
+        </div>
+      </div>
+      <section class="section" style="position: relative;">
+        <b-loading :is-full-page="false" v-model="isLoading">
+          <div class="loader"></div>
+          <div class="section loading-text">
+            <p>Loading NeuralHash model...</p>
+            <p>This takes about 10 to 15 seconds.</p>
+          </div>
+        </b-loading>
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-2">
+            <div class="box">
+              <input type="file" accept="image/*" name="image" id="upload-a" @change="event => loadFile(event, 'image-a')" style="display: none;">
+              <figure class="image is-square">
+                <img id="image-a" src="./assets/doge.png" alt="Image A" @click="click('upload-a')">
+              </figure>
+            </div>
+          </div>
+          <div class="column is-narrow">
+            <div class="box">
+              <div class="content">
+                <b-icon
+                  icon="chevron-left"
+                  size="is-medium"
+                  class="desktop-only">
+                </b-icon>
+                <span v-for="i in hashA" :class="[{'char-same': i.match}, {'char-diff': !i.match}]">{{ i.value }}</span>
+                <b-icon
+                  icon=""
+                  size="is-medium"
+                  class="desktop-only">
+                </b-icon>
+              </div>
+            </div>
+            <div class="box">
+              <div class="content">
+                <b-icon
+                  icon=""
+                  size="is-medium"
+                  class="desktop-only">
+                </b-icon>
+                <span v-for="i in hashB" :class="[{'char-same': i.match}, {'char-diff': !i.match}]">{{ i.value }}</span>
+                <b-icon
+                  icon="chevron-right"
+                  size="is-medium"
+                  class="desktop-only">
+                </b-icon>
+              </div>
+            </div>
+          </div>
+          <div class="column is-2">
+            <div class="box">
+              <input type="file" accept="image/*" name="image" id="upload-b" @change="event => loadFile(event, 'image-b')" style="display: none;">
+              <figure class="image is-square">
+                <img id="image-b" src="./assets/doge_hflip.png" alt="Image B" @click="click('upload-b')">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+  <script src="./main.js"> </script>
+</body>
+</html>
