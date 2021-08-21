@@ -40,6 +40,7 @@ new Vue({
     async getNeuralhash (imageId) {
       let input = tf.browser.fromPixels(document.getElementById(imageId));
       input = tf.image.resizeBilinear(input, [360, 360]).transpose([2, 0, 1]).reshape([1, 3, 360, 360]);
+      input = input.div(tf.scalar(255)).mul(tf.scalar(2)).sub(tf.scalar(1))
       let hash_t = tf.dot(this.seed, this.model.predict(input).reshape([128]))
 
       let hash = '';
