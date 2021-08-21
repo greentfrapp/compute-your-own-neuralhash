@@ -48,7 +48,9 @@
       </div>
       <section class="section" style="position: relative;">
         <b-loading :is-full-page="true" v-model="isLoading">
-          <div class="loader"></div>
+          <section class="section">
+            <div class="loader"></div>
+          </section>
           <div class="section loading-text">
             <p>Loading NeuralHash model...</p>
             <p>This takes about 10 to 15 seconds.</p>
