@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Compute-Your-Own NeuralHash" /> 
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://greentfrapp.github.io/compute-your-own-neuralhash" />
+  <meta property="og:image" content="./assets/landing.png" />
+  <meta property="og:description" content="Compute the NeuralHash algorithm in your browser with your own images." />
+  <title>Compute-Your-Own NeuralHash</title>
   <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,8 +17,8 @@
   <link rel="stylesheet" href="./main.css">
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
-  <script src="./assets/seed.js"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+  <script src="./assets/seed.js"></script>
 </head>
 
 <body>
@@ -20,25 +26,27 @@
     <section class="section">
       <nav class="level">
         <p class="level-item has-text-centered mobile-only">
-          <img src="./neuralhash-title.png" alt="" style="height: 60px;">
+          <img src="./assets/neuralhash-title.png" alt="" style="height: 60px; cursor: default;">
         </p>
         <p class="level-item has-text-centered">
-          <a class="link is-info" href="https://medium.com/@sweekiat/apples-neuralhash-how-it-works-and-ways-to-break-it-577d1edc9838">Introduction</a>
+          <a class="link is-info" target="_blank" href="https://medium.com/@sweekiat/apples-neuralhash-how-it-works-and-ways-to-break-it-577d1edc9838">Introduction</a>
         </p>
         <p class="level-item has-text-centered desktop-only">
-          <img src="./assets/neuralhash-title.png" alt="" style="height: 60px;">
+          <img src="./assets/neuralhash-title.png" alt="" style="height: 60px; cursor: default;">
         </p>
         <p class="level-item has-text-centered">
-          <a class="link is-info">Repository</a>
+          <a class="link is-info" target="_blank" href="https://github.com/greentfrapp/compute-your-own-neuralhash">Repository</a>
         </p>
       </nav>
       <div class="columns is-centered is-vcentered">
         <div class="column is-6">
-          <p>Click on the image to select your own. Hashes are computed on your device and nothing is uploaded.</p>
+          <p>Click on the left and right images to select your own. Hashes are computed on your device and nothing is uploaded.</p>
+          <p>Note: This does not work on mobile yet.</p>
+          <p>Some naturally-occuring hash collisions can be found <a target="_blank" href="https://github.com/roboflow-ai/neuralhash-collisions">here</a>.
         </div>
       </div>
       <section class="section" style="position: relative;">
-        <b-loading :is-full-page="false" v-model="isLoading">
+        <b-loading :is-full-page="true" v-model="isLoading">
           <div class="loader"></div>
           <div class="section loading-text">
             <p>Loading NeuralHash model...</p>
@@ -90,7 +98,7 @@
             <div class="box">
               <input type="file" accept="image/*" name="image" id="upload-b" @change="event => loadFile(event, 'image-b')" style="display: none;">
               <figure class="image is-square">
-                <img id="image-b" src="./assets/doge_hflip.png" alt="Image B" @click="click('upload-b')">
+                <img id="image-b" src="./assets/doge_much.png" alt="Image B" @click="click('upload-b')">
               </figure>
             </div>
           </div>

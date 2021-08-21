@@ -20,6 +20,7 @@ img:hover {
 
 a {
     color: #000000;
+    text-decoration: underline;
 }
 
 span.char-same,
