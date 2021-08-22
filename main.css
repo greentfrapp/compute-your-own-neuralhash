@@ -42,7 +42,7 @@ span.char-diff {
 }
 
 .loading-text {
-    font-size: 1.5em;
+    font-size: 1em;
     color: #111111;
     z-index: 1;
 }
@@ -63,6 +63,10 @@ span.char-diff {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.panel-heading {
+    font-size: 1em;
 }
 
 @media only screen and (max-width: 600px) {

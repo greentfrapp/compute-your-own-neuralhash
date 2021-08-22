@@ -41,19 +41,65 @@
       </nav>
       <div class="columns is-centered is-vcentered">
         <div class="column is-6">
-          <p>Click on the images to use your own. Hashes are computed on your device and nothing is uploaded.</p>
-          <p>Note: This does not work on iOS for now.</p>
-          <p>Some naturally-occuring hash collisions can be found <a target="_blank" href="https://github.com/roboflow-ai/neuralhash-collisions">here</a>.
+          <b-collapse
+              aria-id="background"
+              class="panel"
+              animation="slide"
+              :open="false">
+              <template #trigger>
+                  <div
+                      class="panel-heading"
+                      role="button"
+                      aria-controls="background">
+                      <strong>Background</strong>
+                  </div>
+              </template>
+              <div class="panel-block">
+                <p>
+                Apple is intending to start detecting child sexual abuse material (CSAM) in iCloud photos and they are planning to use the NeuralHash algorithm so that the detection can happen without actually looking at anyone's photos.
+                <br/><br/>
+                Hash functions convert data into strings of characters, which act as fingerprints for the files - different files produce different hashes. But they aren't great for images because the computed hash changes dramatically even if the image is only slightly different (rotated, flipped, cropped, resized).
+                <br/><br/>
+                The NeuralHash solves this and generates hashes that remain largely consistent even when the image is changed slightly.
+                <br/><br/>
+                Read more <a target="_blank" href="https://medium.com/@sweekiat/apples-neuralhash-how-it-works-and-ways-to-break-it-577d1edc9838">here</a>!
+              </p>
+              </div>
+          </b-collapse>
+          <b-collapse
+              aria-id="instructions"
+              class="panel"
+              animation="slide">
+              <template #trigger>
+                  <div
+                      class="panel-heading"
+                      role="button"
+                      aria-controls="instructions">
+                      <strong>Instructions</strong>
+                  </div>
+              </template>
+              <div class="panel-block">
+                <p>
+                Click on the images to use your own. Hashes are computed on your device and nothing is uploaded.
+                <br/>
+                Note: This does not work on iOS for now.
+                <br/>
+                Some naturally-occuring hash collisions can be found <a target="_blank" href="https://github.com/roboflow-ai/neuralhash-collisions" style="display: inline">here</a>.
+              </p>
+              </div>
+          </b-collapse>
         </div>
       </div>
       <section class="section" style="position: relative;">
         <b-loading :is-full-page="true" v-model="isLoading">
-          <section class="section">
+          <section class="section desktop-only">
             <div class="loader"></div>
           </section>
-          <div class="section loading-text">
-            <p>Loading NeuralHash model...</p>
-            <p>This takes about 10 to 15 seconds.</p>
+          <div class="section loading-text column is-6">
+            <p class="block">Loading NeuralHash model... While we're waiting, here's a quick background.</p>
+            <p class="block">Apple is intending to start detecting child sexual abuse material (CSAM) in iCloud photos and they are planning to use the NeuralHash algorithm so that the detection can happen without actually looking at anyone's photos.</p>
+            <p class="block">Hash functions convert data into strings of characters, which act as fingerprints for the files - different files produce different hashes. But they aren't great for images because the computed hash changes dramatically even if the image is only slightly different (rotated, flipped, cropped, resized).</p>
+            <p class="block">The NeuralHash solves this and generates hashes that remain largely consistent even when the image is changed slightly.</p>
           </div>
         </b-loading>
         <div class="columns is-centered is-vcentered">
