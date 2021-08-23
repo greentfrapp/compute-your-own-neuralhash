@@ -107,8 +107,19 @@
             <div class="box">
               <input type="file" accept="image/*" name="image" id="upload-a" @change="event => loadFile(event, 'image-a')" style="display: none;">
               <figure class="image is-square">
-                <img id="image-a" src="./assets/doge.png" alt="Image A" @click="click('upload-a')">
+                <img id="image-a" src="./assets/doge.png" alt="Image A" @click="click('upload-a')" :class="{'hflip': isHFlipA, 'vflip': isVFlipA, 'rotate90': qtrsRotateA === 1, 'rotate180': qtrsRotateA === 2, 'rotate270': qtrsRotateA === 3}">
               </figure>
+              <div class="buttons is-centered">
+                <b-button type="is-dark" inverted @click="hFlip('image-a')"><b-icon
+                  icon="flip-horizontal"
+                  size="is-small"></b-icon></b-button>
+                <b-button type="is-dark" inverted @click="vFlip('image-a')"><b-icon
+                  icon="flip-vertical"
+                  size="is-small"></b-icon></b-button>
+                <b-button type="is-dark" inverted @click="rotate('image-a')"><b-icon
+                  icon="rotate-right"
+                  size="is-small"></b-icon></b-button>
+              </div>
             </div>
           </div>
           <div class="column is-narrow">
@@ -147,8 +158,19 @@
             <div class="box">
               <input type="file" accept="image/*" name="image" id="upload-b" @change="event => loadFile(event, 'image-b')" style="display: none;">
               <figure class="image is-square">
-                <img id="image-b" src="./assets/doge_much.png" alt="Image B" @click="click('upload-b')">
+                <img id="image-b" src="./assets/doge_much.png" alt="Image B" @click="click('upload-b')" :class="{'hflip': isHFlipB, 'vflip': isVFlipB, 'rotate90': qtrsRotateB === 1, 'rotate180': qtrsRotateB === 2, 'rotate270': qtrsRotateB === 3}">
               </figure>
+              <div class="buttons is-centered">
+                <b-button type="is-dark" inverted @click="hFlip('image-b')"><b-icon
+                  icon="flip-horizontal"
+                  size="is-small"></b-icon></b-button>
+                <b-button type="is-dark" inverted @click="vFlip('image-b')"><b-icon
+                  icon="flip-vertical"
+                  size="is-small"></b-icon></b-button>
+                <b-button type="is-dark" inverted @click="rotate('image-b')"><b-icon
+                  icon="rotate-right"
+                  size="is-small"></b-icon></b-button>
+              </div>
             </div>
           </div>
         </div>

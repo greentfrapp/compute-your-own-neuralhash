@@ -20,6 +20,12 @@ new Vue({
       isLoading: true,
       isLoadingA: false,
       isLoadingB: false,
+      isHFlipA: false,
+      isVFlipA: false,
+      qtrsRotateA: 0,
+      isHFlipB: false,
+      isVFlipB: false,
+      qtrsRotateB: 0,
     }
   },
   methods: {
@@ -39,7 +45,35 @@ new Vue({
     },
     async getNeuralhash (imageId) {
       let input = tf.browser.fromPixels(document.getElementById(imageId));
-      input = tf.image.resizeBilinear(input, [360, 360]).transpose([2, 0, 1]).reshape([1, 3, 360, 360]);
+      input = tf.image.resizeBilinear(input, [360, 360])
+      if (imageId === 'image-a') {
+        if (this.isHFlipA) {
+          input = input.reverse(1)
+        }
+        if (this.isVFlipA) {
+          input = input.reverse(0)
+        }
+        for (let i=this.qtrsRotateA; i>0; i--) {
+          for (let j=3; j>0; j--) {
+            input = input.transpose([1, 0, 2])
+            input = input.reverse(0)
+          }
+        }
+      } else if (imageId === 'image-b') {
+        if (this.isHFlipB) {
+          input = input.reverse(1)
+        }
+        if (this.isVFlipB) {
+          input = input.reverse(0)
+        }
+        for (let i=this.qtrsRotateB; i>0; i--) {
+          for (let j=3; j>0; j--) {
+            input = input.transpose([1, 0, 2])
+            input = input.reverse(0)
+          }
+        }
+      }
+      input = input.transpose([2, 0, 1]).reshape([1, 3, 360, 360]);
       input = input.div(tf.scalar(255)).mul(tf.scalar(2)).sub(tf.scalar(1))
       let hash_t = tf.dot(this.seed, this.model.predict(input).reshape([128]))
 
@@ -70,7 +104,16 @@ new Vue({
       this.hashB = hashHexB
     },
     async loadFile (event, imageId) {
-      document.getElementById(imageId).src = URL.createObjectURL(event.target.files[0]);
+      document.getElementById(imageId).src = URL.createObjectURL(event.target.files[0])
+      if (imageId === 'image-a') {
+        this.isHFlipA = false
+        this.isVFlipA = false
+        this.qtrsRotateA = 0
+      } else if (imageId === 'image-b') {
+        this.isHFlipB = false
+        this.isVFlipB = false
+        this.qtrsRotateB = 0
+      }
       await this.sleep(100)
       await this.getNeuralhashHelper(imageId)
     },
@@ -78,7 +121,31 @@ new Vue({
       document.getElementById(inputId).click()
     },
     sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms))
+    },
+    hFlip(imageId) {
+      if (imageId === 'image-a') {
+        this.isHFlipA = !this.isHFlipA
+      } else if (imageId === 'image-b') {
+        this.isHFlipB = !this.isHFlipB
+      }
+      this.getNeuralhashHelper(imageId)
+    },
+    vFlip(imageId) {
+      if (imageId === 'image-a') {
+        this.isVFlipA = !this.isVFlipA
+      } else if (imageId === 'image-b') {
+        this.isVFlipB = !this.isVFlipB
+      }
+      this.getNeuralhashHelper(imageId)
+    },
+    rotate(imageId) {
+      if (imageId === 'image-a') {
+        this.qtrsRotateA = (this.qtrsRotateA + 1) % 4
+      } else if (imageId === 'image-b') {
+        this.qtrsRotateB = (this.qtrsRotateB + 1) % 4
+      }
+      this.getNeuralhashHelper(imageId)
     }
   }
 })

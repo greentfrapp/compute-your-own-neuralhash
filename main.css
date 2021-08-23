@@ -69,6 +69,81 @@ span.char-diff {
     font-size: 1em;
 }
 
+img.hflip {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+img.vflip {
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+
+img.hflip.vflip {
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+}
+
+img.rotate90 {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+img.hflip.rotate90 {
+    -webkit-transform: rotate(90deg) scaleX(-1);
+    transform: rotate(90deg) scaleX(-1);
+}
+
+img.vflip.rotate90 {
+    -webkit-transform: rotate(90deg) scaleY(-1);
+    transform: rotate(90deg) scaleY(-1);
+}
+
+img.hflip.vflip.rotate90 {
+    -webkit-transform: scale(-1, -1) rotate(90deg);
+    transform: scale(-1, -1) rotate(90deg);
+}
+
+img.rotate180 {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+img.hflip.rotate180 {
+    -webkit-transform: scaleX(-1) rotate(180deg);
+    transform: scaleX(-1) rotate(180deg);
+}
+
+img.vflip.rotate180 {
+    -webkit-transform: scaleY(-1) rotate(180deg);
+    transform: scaleY(-1) rotate(180deg);
+}
+
+img.hflip.vflip.rotate180 {
+    -webkit-transform: scale(-1, -1) rotate(180deg);
+    transform: scale(-1, -1) rotate(180deg);
+}
+
+img.rotate270 {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+img.hflip.rotate270 {
+    -webkit-transform: rotate(270deg) scaleX(-1);
+    transform: rotate(270deg) scaleX(-1);
+}
+
+img.vflip.rotate270 {
+    -webkit-transform: rotate(270deg) scaleY(-1);
+    transform: rotate(270deg) scaleY(-1);
+}
+
+img.hflip.vflip.rotate270 {
+    -webkit-transform: scale(-1, -1) rotate(270deg);
+    transform: scale(-1, -1) rotate(270deg);
+}
+
 @media only screen and (max-width: 600px) {
   .image-container {
     width: 64px;
