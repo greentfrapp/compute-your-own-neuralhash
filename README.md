@@ -1,2 +1,2 @@
 # compute-your-own-neuralhash
-Simple demo to compute your own NeuralHash on-device.
+Simple [demo](https://greentfrapp.github.io/compute-your-own-neuralhash) to compute your own NeuralHash on-device.
